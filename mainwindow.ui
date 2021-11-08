@@ -10,8 +10,11 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>OpenHandCursor</cursorShape>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BettingApp</string>
   </property>
   <property name="styleSheet">
    <string notr="true">* {
@@ -86,8 +89,9 @@ background-color: #424242;
        <widget class="QComboBox" name="comboBox">
         <property name="styleSheet">
          <string notr="true">* {
-	background-color:#424242;
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 255, 255, 255), stop:0.495 rgba(255, 255, 255, 255), stop:0.505 rgba(255, 0, 0, 255), stop:1 rgba(255, 0, 0, 255));
 	border-radius: 0px;
+	
 }</string>
         </property>
         <item>
