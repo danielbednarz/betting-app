@@ -18,7 +18,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">* {
-background-color: #424242;
+background-color: gray;
  }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -28,7 +28,7 @@ background-color: #424242;
       <x>240</x>
       <y>60</y>
       <width>321</width>
-      <height>271</height>
+      <height>291</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -89,7 +89,7 @@ background-color: #424242;
        <widget class="QComboBox" name="comboBox">
         <property name="styleSheet">
          <string notr="true">* {
-	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 255, 255, 255), stop:0.495 rgba(255, 255, 255, 255), stop:0.505 rgba(255, 0, 0, 255), stop:1 rgba(255, 0, 0, 255));
+	background-color: #424242;
 	border-radius: 0px;
 	
 }</string>
@@ -396,12 +396,41 @@ background-color: #424242;
       </item>
      </layout>
     </widget>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>301</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QProgressBar::chunk {
+    background-color: #ff6f00;
+    width: 10px;
+    margin: 0.5px;
+}</string>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="textVisible">
+      <bool>true</bool>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </widget>
    <widget class="QTextEdit" name="textEdit_2">
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>360</y>
+      <y>380</y>
       <width>321</width>
       <height>151</height>
      </rect>
@@ -410,6 +439,46 @@ background-color: #424242;
      <string notr="true">* {
 	color: white;
 }</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="team_1_score">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>60</y>
+      <width>47</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>48</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="team_2_score">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>60</y>
+      <width>47</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>48</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
