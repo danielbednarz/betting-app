@@ -11,10 +11,13 @@
    </rect>
   </property>
   <property name="cursor">
-   <cursorShape>OpenHandCursor</cursorShape>
+   <cursorShape>ArrowCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>BettingApp</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">* {

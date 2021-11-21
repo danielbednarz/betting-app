@@ -9,6 +9,8 @@
 #include <iostream>
 #include <random>
 #include <cstdlib>
+#include <chrono>
+#include <random>
 
 class Score
 {
