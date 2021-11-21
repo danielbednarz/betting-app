@@ -10,9 +10,6 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="cursor">
-   <cursorShape>OpenHandCursor</cursorShape>
-  </property>
   <property name="windowTitle">
    <string>BettingApp</string>
   </property>
@@ -27,8 +24,8 @@ background-color: gray;
      <rect>
       <x>240</x>
       <y>60</y>
-      <width>321</width>
-      <height>291</height>
+      <width>341</width>
+      <height>321</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -38,6 +35,14 @@ background-color: gray;
 	font-size: 16px;
 	color: white;
 	align=&quot;center&quot;;
+}
+
+QPushButton {
+	background-color: #6d6d6d;
+	text-align:center;
+	font-size: 12px;
+	font-weight: bolder;
+	border-radius: 5px;
 }</string>
     </property>
     <property name="frameShape">
@@ -49,7 +54,7 @@ background-color: gray;
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>60</x>
        <y>10</y>
        <width>251</width>
        <height>41</height>
@@ -75,38 +80,83 @@ background-color: gray;
     <widget class="QWidget" name="gridLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>69</x>
-       <y>60</y>
-       <width>181</width>
-       <height>171</height>
+       <x>30</x>
+       <y>58</y>
+       <width>282</width>
+       <height>221</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="verticalSpacing">
        <number>12</number>
       </property>
-      <item row="3" column="0">
-       <widget class="QComboBox" name="comboBox">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="styleSheet">
          <string notr="true">* {
-	background-color: #424242;
-	border-radius: 0px;
-	
+	font-size: 14px;
+	text-align: center;
+	align: center;
 }</string>
         </property>
-        <item>
-         <property name="text">
-          <string>Druzyna1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Druzyna2</string>
-         </property>
-        </item>
+        <property name="text">
+         <string>na:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item row="4" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="betHomeButton">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="betDrawButton">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">margin: 0px 2px 0px 2px;</string>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="betAwayButton">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="5" column="0">
        <widget class="QPushButton" name="pushButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -325,7 +375,7 @@ background-color: gray;
          </font>
         </property>
         <property name="cursor">
-         <cursorShape>ArrowCursor</cursorShape>
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -356,27 +406,54 @@ background-color: gray;
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">* {
-	font-size: 14px;
+      <item row="3" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>1</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="styleSheet">
+           <string notr="true">* {
 	text-align: center;
-	align: center;
 }</string>
-        </property>
-        <property name="text">
-         <string>Na drużynę:</string>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>2</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
-      <item row="1" column="0">
+      <item row="0" column="0">
        <widget class="QTextEdit" name="textEdit">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
@@ -389,6 +466,12 @@ background-color: gray;
 	background-color: #424242;
 }</string>
         </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
         <property name="placeholderText">
          <string>Podaj kwotę</string>
         </property>
@@ -399,8 +482,8 @@ background-color: gray;
     <widget class="QProgressBar" name="progressBar">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>250</y>
+       <x>20</x>
+       <y>290</y>
        <width>301</width>
        <height>23</height>
       </rect>
@@ -430,8 +513,8 @@ background-color: gray;
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>380</y>
-      <width>321</width>
+      <y>400</y>
+      <width>341</width>
       <height>151</height>
      </rect>
     </property>
