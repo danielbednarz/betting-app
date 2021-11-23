@@ -9,11 +9,15 @@
 #include <iostream>
 #include <random>
 #include <cstdlib>
+#include <vector>
+
+using namespace std;
 
 class Score
 {
 public:
-    int DrawScore();
+    vector<int> DrawScore();
+    list<int> GetGoalsMinutes(int score);
 };
 
 #endif // SCORE_H

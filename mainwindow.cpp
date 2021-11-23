@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include "bet.h"
 #include <vector>
+#include <algorithm>
 Bet bet;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -11,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     bet.DrawOdds();
+    srand(time(0));
     vector<float> odds = bet.GetOdds();
     ui->betHomeButton->setText(QString::number(odds[0]));
     ui->betDrawButton->setText(QString::number(odds[1]));
@@ -48,22 +50,39 @@ void MainWindow::on_pushButton_clicked()
     if (isOk && selectedChoice != "-1")
     {
         QString selectedOdds = QString::number(bet.GetSelectedOdds());
-        ui->team_1_score->setText("");
-        ui->team_2_score->setText("");
+        ui->team_1_score->setText("0");
+        ui->team_2_score->setText("0");
+        ui->homeGoals->setText("");
+        ui->awayGoals->setText("");
 
         ui->textEdit_2->append("Obstawiono " + text + " na " + selectedChoice + " po kursie " + selectedOdds + ".");
         ui->textEdit->setText("");
 
-        for(int i=0; i<=100; i++) {
-            std::chrono::milliseconds timespan(15);
+        vector<int> scores = score.DrawScore();
+        list<int> homeTeamGoalsMins = score.GetGoalsMinutes(scores[0]);
+        list<int> awayTeamGoalsMins = score.GetGoalsMinutes(scores[1]);
+
+        for(int i=0; i<=90; i++) {
+            bool homeFound = (std::find(homeTeamGoalsMins.begin(), homeTeamGoalsMins.end(), i) != homeTeamGoalsMins.end());
+            if (homeFound == true)
+            {
+                ui->homeGoals->append("⚽ " + QString::number(i) + "'");
+                int currentHomeScore = ui->team_1_score->text().toInt();
+                currentHomeScore++;
+                ui->team_1_score->setText(QString::number(currentHomeScore));
+            }
+            bool awayFound = (std::find(awayTeamGoalsMins.begin(), awayTeamGoalsMins.end(), i) != awayTeamGoalsMins.end());
+            if (awayFound == true)
+            {
+                ui->awayGoals->append("⚽ " + QString::number(i) + "'");
+                int currentAwayScore = ui->team_2_score->text().toInt();
+                currentAwayScore++;
+                ui->team_2_score->setText(QString::number(currentAwayScore));
+            }
+            std::chrono::milliseconds timespan(50);
             std::this_thread::sleep_for(timespan);
             ui->progressBar->setValue(i);
-            if(i == 50) {
-                ui->team_1_score->setText(QString::number(score.DrawScore()));
-            }
         }
-
-        ui->team_2_score->setText(QString::number(score.DrawScore()));
 
         ResetAfterBet();
     }
@@ -73,7 +92,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_betHomeButton_clicked()
 {
     bet.SetSelectedBetOption(1);
-    ui->betHomeButton->setStyleSheet("background-color: #daa520;");
+    ui->betHomeButton->setStyleSheet("background-color: #ff6f00;");
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
 }
@@ -83,7 +102,7 @@ void MainWindow::on_betDrawButton_clicked()
 {
     bet.SetSelectedBetOption(0);
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
-    ui->betDrawButton->setStyleSheet("background-color: #daa520; margin: 0px 2px 0px 2px;");
+    ui->betDrawButton->setStyleSheet("background-color: #ff6f00; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
 }
 
@@ -93,6 +112,6 @@ void MainWindow::on_betAwayButton_clicked()
     bet.SetSelectedBetOption(2);
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
-    ui->betAwayButton->setStyleSheet("background-color: #daa520;");
+    ui->betAwayButton->setStyleSheet("background-color: #ff6f00;");
 }
 
