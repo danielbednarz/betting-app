@@ -10,16 +10,19 @@ CONFIG += c++11
 
 SOURCES += \
     bet.cpp \
+    InitialScreen/initialscreen.cpp \
     main.cpp \
     mainwindow.cpp \
     score.cpp
 
 HEADERS += \
+    InitialScreen/initialscreen.h \
     bet.h \
     mainwindow.h \
     score.h
 
 FORMS += \
+    InitialScreen/initialscreen.ui \
     mainwindow.ui
 
 # Default rules for deployment.
