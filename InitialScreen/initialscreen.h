@@ -18,6 +18,18 @@ public:
 private slots:
     void on_pushButton_8_clicked();
 
+    void on_aboutGameButton_clicked();
+
+    void on_backFromAboutGameButton_clicked();
+
+    void on_loginButton_clicked();
+
+    void on_backToMenuButton_clicked();
+
+    void on_backToMenuFromRegisterButton_clicked();
+
+    void on_registerButton_clicked();
+
 private:
     Ui::InitialScreen *ui;
 };
