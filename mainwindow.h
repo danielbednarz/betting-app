@@ -17,7 +17,15 @@ public:
     ~MainWindow();
 
 private slots:
+    void ResetAfterBet();
+
     void on_pushButton_clicked();
+
+    void on_betHomeButton_clicked();
+
+    void on_betDrawButton_clicked();
+
+    void on_betAwayButton_clicked();
 
 private:
     Ui::MainWindow *ui;
