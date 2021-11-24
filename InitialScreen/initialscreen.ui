@@ -341,7 +341,7 @@ background-color: gray;
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
              <string/>
@@ -599,7 +599,7 @@ background-color: gray;
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
              <string/>
@@ -857,7 +857,7 @@ background-color: gray;
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
              <string/>
@@ -1115,7 +1115,7 @@ background-color: gray;
              </font>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="toolTip">
              <string/>
@@ -1301,7 +1301,7 @@ background-color: gray;
                </size>
               </property>
               <property name="cursor">
-               <cursorShape>OpenHandCursor</cursorShape>
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">* {
@@ -1337,7 +1337,7 @@ background-color: gray;
                </size>
               </property>
               <property name="cursor">
-               <cursorShape>OpenHandCursor</cursorShape>
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">* {
@@ -1510,7 +1510,7 @@ background-color: gray;
                </size>
               </property>
               <property name="cursor">
-               <cursorShape>OpenHandCursor</cursorShape>
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">* {
@@ -1549,7 +1549,7 @@ background-color: gray;
                </size>
               </property>
               <property name="cursor">
-               <cursorShape>OpenHandCursor</cursorShape>
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">* {
@@ -1661,7 +1661,7 @@ background-color: gray;
              </size>
             </property>
             <property name="cursor">
-             <cursorShape>OpenHandCursor</cursorShape>
+             <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
              <string notr="true">* {

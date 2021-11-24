@@ -2,6 +2,7 @@
 #define INITIALSCREEN_H
 
 #include <QMainWindow>
+#include "mainwindow.h"
 
 namespace Ui {
 class InitialScreen;
@@ -30,8 +31,13 @@ private slots:
 
     void on_registerButton_clicked();
 
+    void on_loginSubmitButton_clicked();
+
+    void on_confirmRegisterButton_clicked();
+
 private:
     Ui::InitialScreen *ui;
+    MainWindow *mainWindow;
 };
 
 #endif // INITIALSCREEN_H

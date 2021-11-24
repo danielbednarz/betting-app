@@ -1,5 +1,6 @@
 #include "initialscreen.h"
 #include "ui_initialscreen.h"
+#include "mainwindow.h"
 
 InitialScreen::InitialScreen(QWidget *parent) :
     QMainWindow(parent),
@@ -52,5 +53,22 @@ void InitialScreen::on_backToMenuFromRegisterButton_clicked()
 void InitialScreen::on_registerButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void InitialScreen::on_loginSubmitButton_clicked()
+{
+    mainWindow = new MainWindow(this);
+    mainWindow->show();
+    InitialScreen::hide();
+
+}
+
+
+void InitialScreen::on_confirmRegisterButton_clicked()
+{
+    mainWindow = new MainWindow(this);
+    mainWindow->show();
+    InitialScreen::hide();
 }
 
