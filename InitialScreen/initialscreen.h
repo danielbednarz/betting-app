@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "mainwindow.h"
+#include "DbConnector/DbConnector.h"
 
 namespace Ui {
 class InitialScreen;

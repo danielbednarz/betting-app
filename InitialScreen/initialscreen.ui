@@ -1210,29 +1210,20 @@ background-color: gray;
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="loginField">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
+           <widget class="QLineEdit" name="loginPageLoginInputField">
+            <property name="minimumSize">
              <size>
-              <width>16777215</width>
+              <width>0</width>
               <height>35</height>
              </size>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">* {
 	background-color: #424242;
 }</string>
             </property>
-            <property name="inputMethodHints">
-             <set>Qt::ImhNone</set>
+            <property name="maxLength">
+             <number>64</number>
             </property>
             <property name="placeholderText">
              <string>Login</string>
@@ -1240,22 +1231,10 @@ background-color: gray;
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="passwordField">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+           <widget class="QLineEdit" name="loginPagePasswordInputField">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
               <height>35</height>
              </size>
             </property>
@@ -1264,8 +1243,8 @@ background-color: gray;
 	background-color: #424242;
 }</string>
             </property>
-            <property name="inputMethodHints">
-             <set>Qt::ImhNone</set>
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
             </property>
             <property name="placeholderText">
              <string>Hasło</string>
@@ -1416,16 +1395,10 @@ background-color: gray;
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="loginToRegisterField">
+           <widget class="QLineEdit" name="registerPageLoginInputField">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
               <height>35</height>
              </size>
             </property>
@@ -1434,22 +1407,19 @@ background-color: gray;
 	background-color: #424242;
 }</string>
             </property>
+            <property name="maxLength">
+             <number>64</number>
+            </property>
             <property name="placeholderText">
-             <string>Nazwa użytkownika</string>
+             <string>Login</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="passwordToRegisterField">
+           <widget class="QLineEdit" name="registerPagePasswordInputField">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
               <height>35</height>
              </size>
             </property>
@@ -1457,6 +1427,12 @@ background-color: gray;
              <string notr="true">* {
 	background-color: #424242;
 }</string>
+            </property>
+            <property name="maxLength">
+             <number>64</number>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
             </property>
             <property name="placeholderText">
              <string>Hasło</string>
@@ -1464,16 +1440,10 @@ background-color: gray;
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="confirmPasswordToRegisterField">
+           <widget class="QLineEdit" name="registerPageConfirmPasswordInputField">
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
               <height>35</height>
              </size>
             </property>
@@ -1481,6 +1451,12 @@ background-color: gray;
              <string notr="true">* {
 	background-color: #424242;
 }</string>
+            </property>
+            <property name="maxLength">
+             <number>64</number>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
             </property>
             <property name="placeholderText">
              <string>Powtórz hasło</string>

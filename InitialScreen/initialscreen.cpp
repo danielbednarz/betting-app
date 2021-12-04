@@ -1,12 +1,12 @@
 #include "initialscreen.h"
 #include "ui_initialscreen.h"
-#include "mainwindow.h"
 
 InitialScreen::InitialScreen(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::InitialScreen)
 {
     ui->setupUi(this);
+    DbConnector::SetUpConnection();
 }
 
 InitialScreen::~InitialScreen()
@@ -52,23 +52,56 @@ void InitialScreen::on_backToMenuFromRegisterButton_clicked()
 
 void InitialScreen::on_registerButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
+   ui->stackedWidget->setCurrentIndex(2);
 }
 
 
 void InitialScreen::on_loginSubmitButton_clicked()
 {
-    mainWindow = new MainWindow(this);
-    mainWindow->show();
-    InitialScreen::hide();
+    QString login = ui->loginPageLoginInputField->text();
+    QString password = ui->loginPagePasswordInputField->text();
 
+    QString query = QString("SELECT * FROM Users WHERE Login = '%1' AND Password = '%2'").arg(login, password);
+
+    QSqlQuery queryStatus = DbConnector::SelectQuery(query);
+
+    if (queryStatus.next() == true) {
+        QMessageBox::information(this, "BettingApp", "Zalogowano pomyślnie");
+        mainWindow = new MainWindow(this);
+        mainWindow->show();
+        InitialScreen::hide();
+    }
+    else {
+        QMessageBox::warning(this, "BettingApp", "Nie udało się zalogować. Błędny login lub hasło.");
+    }
 }
 
 
 void InitialScreen::on_confirmRegisterButton_clicked()
 {
-    mainWindow = new MainWindow(this);
-    mainWindow->show();
-    InitialScreen::hide();
+    QString login = ui->registerPageLoginInputField->text();
+    QString password = ui->registerPagePasswordInputField->text();
+    QString confirmPassword = ui->registerPageConfirmPasswordInputField->text();
+
+    if(password == confirmPassword) {
+        QString query = QString("INSERT INTO Users VALUES ('%1', '%2', 0)").arg(login, password);
+
+        bool queryStatus = DbConnector::InsertQuery(query);
+
+        if (queryStatus) {
+            QMessageBox::information(this, "BettingApp", "Konto zostało utworzone pomyślnie");
+            mainWindow = new MainWindow(this);
+            mainWindow->show();
+            InitialScreen::hide();
+        }
+        else {
+            qDebug() << "Blad";
+            QMessageBox::warning(this, "BettingApp", "Nie udało się utworzyć konta. Podany login już istnieje.");
+        }
+    }
+    else {
+        QMessageBox::warning(this, "BettingApp", "Nie udało się utworzyć konta. Podane hasła są różne.");
+    }
+
 }
 
