@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "mainwindow.h"
 #include "DbConnector/DbConnector.h"
+#include "user.h"
 
 namespace Ui {
 class InitialScreen;

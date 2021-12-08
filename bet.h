@@ -1,5 +1,7 @@
 #ifndef BET_H
 #define BET_H
+#include "score.h"
+
 #include <vector>
 
 using namespace std;
@@ -7,17 +9,21 @@ using namespace std;
 class Bet
 {
 public:
-    void CreateBet();
-    void SetSelectedBetOption(int option);
-    int GetSelectedBetOption();
-    void DrawOdds();
-    vector<float> GetOdds();
-    float GetSelectedOdds();
+    static void CreateBet();
+    static void AddBet(Score score);
+    static void SetSelectedBetOption(int option);
+    static int GetSelectedBetOption();
+    static void DrawOdds();
+    static vector<float> GetOdds();
+    static float GetSelectedOdds();
+    static void SetBetAmount(int number);
+    static int GetBetAmount();
 private:
-    float homeOdds;
-    float drawOdds;
-    float awayOdds;
-    int selectedBetOption = -1;
+    static float homeOdds;
+    static float drawOdds;
+    static float awayOdds;
+    static int betAmount;
+    static int selectedBetOption;
 };
 
 #endif // BET_H

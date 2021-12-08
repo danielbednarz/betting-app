@@ -19,6 +19,19 @@ vector<int> Score::DrawScore()
         scores.push_back(score);
     }
 
+    if (scores[0] < scores[1])
+    {
+        matchWinner = 2;
+    }
+    else if (scores[0] > scores[1])
+    {
+        matchWinner = 1;
+    }
+    else if (scores[0] == scores[1])
+    {
+        matchWinner = 0;
+    }
+
     return scores;
 }
 
@@ -31,4 +44,9 @@ list<int> Score::GetGoalsMinutes(int score)
     }
     goalsMins.sort();
     return goalsMins;
+}
+
+int Score::GetMatchWinner()
+{
+    return matchWinner;
 }

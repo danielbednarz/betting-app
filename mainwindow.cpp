@@ -4,19 +4,21 @@
 #include "bet.h"
 #include <vector>
 #include <algorithm>
-Bet bet;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    bet.DrawOdds();
+    Bet::DrawOdds();
     srand(time(0));
-    vector<float> odds = bet.GetOdds();
+    vector<float> odds = Bet::GetOdds();
     ui->betHomeButton->setText(QString::number(odds[0]));
     ui->betDrawButton->setText(QString::number(odds[1]));
     ui->betAwayButton->setText(QString::number(odds[2]));
+
+    ui->loggedInAsValue->setText(User::GetUserName());
+    ui->accountBalanceValue->setText(QString::number(User::GetUserAccountBalance()));
 }
 
 MainWindow::~MainWindow()
@@ -26,13 +28,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::ResetAfterBet()
 {
-    bet.DrawOdds();
-    vector<float> odds = bet.GetOdds();
+    User::RenewUserBalance();
+    ui->accountBalanceValue->setText(QString::number(User::GetUserAccountBalance()));
+    Bet::DrawOdds();
+    vector<float> odds = Bet::GetOdds();
     ui->betHomeButton->setText(QString::number(odds[0]));
     ui->betDrawButton->setText(QString::number(odds[1]));
     ui->betAwayButton->setText(QString::number(odds[2]));
     // do ustalenia, czy da sie to zmienic
-    bet.SetSelectedBetOption(-1);
+    Bet::SetSelectedBetOption(-1);
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
@@ -45,11 +49,11 @@ void MainWindow::on_pushButton_clicked()
     QString text = ui->textEdit->toPlainText();
     bool isOk;
     text.toInt(&isOk);
-    QString selectedChoice = QString::number(bet.GetSelectedBetOption());
+    QString selectedChoice = QString::number(Bet::GetSelectedBetOption());
 
     if (isOk && selectedChoice != "-1")
     {
-        QString selectedOdds = QString::number(bet.GetSelectedOdds());
+        QString selectedOdds = QString::number(Bet::GetSelectedOdds());
         ui->team_1_score->setText("0");
         ui->team_2_score->setText("0");
         ui->homeGoals->setText("");
@@ -61,6 +65,9 @@ void MainWindow::on_pushButton_clicked()
         vector<int> scores = score.DrawScore();
         list<int> homeTeamGoalsMins = score.GetGoalsMinutes(scores[0]);
         list<int> awayTeamGoalsMins = score.GetGoalsMinutes(scores[1]);
+
+        Bet::SetBetAmount(text.toInt());
+        Bet::AddBet(score);
 
         for(int i=0; i<=90; i++) {
             bool homeFound = (std::find(homeTeamGoalsMins.begin(), homeTeamGoalsMins.end(), i) != homeTeamGoalsMins.end());
@@ -91,7 +98,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_betHomeButton_clicked()
 {
-    bet.SetSelectedBetOption(1);
+    Bet::SetSelectedBetOption(1);
     ui->betHomeButton->setStyleSheet("background-color: #ff6f00;");
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
@@ -100,7 +107,7 @@ void MainWindow::on_betHomeButton_clicked()
 
 void MainWindow::on_betDrawButton_clicked()
 {
-    bet.SetSelectedBetOption(0);
+    Bet::SetSelectedBetOption(0);
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
     ui->betDrawButton->setStyleSheet("background-color: #ff6f00; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
@@ -109,7 +116,7 @@ void MainWindow::on_betDrawButton_clicked()
 
 void MainWindow::on_betAwayButton_clicked()
 {
-    bet.SetSelectedBetOption(2);
+    Bet::SetSelectedBetOption(2);
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #ff6f00;");

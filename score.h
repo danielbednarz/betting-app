@@ -18,6 +18,9 @@ class Score
 public:
     vector<int> DrawScore();
     list<int> GetGoalsMinutes(int score);
+    int GetMatchWinner();
+private:
+    int matchWinner;
 };
 
 #endif // SCORE_H
