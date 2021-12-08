@@ -7,7 +7,7 @@ CREATE TABLE Users (
 )
 
 CREATE TABLE Matches (
-	 [Id] int NOT NULL PRIMARY KEY
+	 [Id] int NOT NULL IDENTITY(1,1) PRIMARY KEY
 	,[MatchDate] datetime2 NOT NULL
 )
 

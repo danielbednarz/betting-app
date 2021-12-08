@@ -15,14 +15,16 @@ SOURCES += \
     InitialScreen/initialscreen.cpp \
     main.cpp \
     mainwindow.cpp \
-    score.cpp
+    score.cpp \
+    user.cpp
 
 HEADERS += \
     DbConnector/DbConnector.h \
     InitialScreen/initialscreen.h \
     bet.h \
     mainwindow.h \
-    score.h
+    score.h \
+    user.h
 
 FORMS += \
     InitialScreen/initialscreen.ui \

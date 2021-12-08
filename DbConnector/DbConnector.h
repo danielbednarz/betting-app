@@ -17,7 +17,7 @@ public:
     DbConnector();
     static void SetUpConnection();
     static QSqlQuery SelectQuery(QString query);
-    static bool InsertQuery(QString query);
+    static int InsertQuery(QString query);
 };
 
 #endif // DBCONNECTOR_H

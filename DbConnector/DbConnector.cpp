@@ -45,15 +45,15 @@ QSqlQuery DbConnector::SelectQuery(QString queryToExecute)
     return query;
 }
 
-bool DbConnector::InsertQuery(QString queryToExecute)
+int DbConnector::InsertQuery(QString queryToExecute)
 {
     QSqlQuery query;
     if (query.exec(queryToExecute)) {
         qDebug() << "Ok: "<< queryToExecute;
-        return true;
+        return query.lastInsertId().toInt();
     }
     else {
         qDebug() << "Blad: " << queryToExecute;
-        return false;
+        return -1;
     }
 }
