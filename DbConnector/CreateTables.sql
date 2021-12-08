@@ -7,7 +7,7 @@ CREATE TABLE Users (
 )
 
 CREATE TABLE Matches (
-	 [Id] int NOT NULL PRIMARY KEY
+	 [Id] int NOT NULL IDENTITY(1,1) PRIMARY KEY
 	,[MatchDate] datetime2 NOT NULL
 )
 
@@ -16,8 +16,8 @@ CREATE TABLE Bets (
 	,[Money] decimal(18,2)
 	,[BetType] int NOT NULL 
 	,[NumberOfGoals] int
-	,[MatchId] int NOT NULL FOREIGN KEY(Id) REFERENCES Matches(Id)
-	,[UserId] int NOT NULL FOREIGN KEY(Id) REFERENCES Users(Id)
+	,[MatchId] int NOT NULL FOREIGN KEY(MatchId) REFERENCES Matches(Id)
+	,[UserId] int NOT NULL FOREIGN KEY(UserId) REFERENCES Users(Id)
 )
 
 CREATE TABLE Teams (
@@ -30,6 +30,6 @@ CREATE TABLE TeamsMatches (
 	 [Id] int NOT NULL IDENTITY(1,1) PRIMARY KEY
 	,[Score] int NOT NULL
 	,[IsHome] bit NOT NULL
-	,[MatchId] int NOT NULL FOREIGN KEY(Id) REFERENCES Matches(Id)
-	,[TeamId] int NOT NULL FOREIGN KEY(Id) REFERENCES Teams(Id)
+	,[MatchId] int NOT NULL FOREIGN KEY(MatchId) REFERENCES Matches(Id)
+	,[TeamId] int NOT NULL FOREIGN KEY(TeamId) REFERENCES Teams(Id)
 )
