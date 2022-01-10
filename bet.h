@@ -1,6 +1,6 @@
 #ifndef BET_H
 #define BET_H
-#include "score.h"
+#include "Score/score.h"
 
 #include <vector>
 

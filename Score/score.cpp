@@ -6,12 +6,6 @@ using namespace std;
 
 vector<int> Score::DrawScore()
 {
-//    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-//    std::default_random_engine generator(seed);
-
-//    std::uniform_int_distribution<int> distributionInteger(0, 6); // Set the numbers for int.
-
-//    return distributionInteger(generator);
     vector<int> scores;
     for (int i = 0; i < 2; i++)
     {
@@ -50,3 +44,4 @@ int Score::GetMatchWinner()
 {
     return matchWinner;
 }
+

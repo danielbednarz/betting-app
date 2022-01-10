@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "score.h"
+#include "Score/score.h"
 #include "ui_mainwindow.h"
 #include "bet.h"
 #include <vector>
@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    SetTeamsForMatch();
+
     Bet::DrawOdds();
     srand(time(0));
     vector<float> odds = Bet::GetOdds();
@@ -24,6 +27,17 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::SetTeamsForMatch()
+{
+    vector<QString> teamsForMatch = Team::DrawTeamsForMatch();
+
+    Team::SetHomeTeam(teamsForMatch[0]);
+    Team::SetAwayTeam(teamsForMatch[1]);
+
+    ui->label_5->setText(Team::GetHomeTeam());
+    ui->label_3->setText(Team::GetAwayTeam());
 }
 
 void MainWindow::ResetAfterBet()
@@ -42,6 +56,18 @@ void MainWindow::ResetAfterBet()
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
 }
 
+QString MainWindow::GetSelectedTeamName()
+{
+    switch(Bet::GetSelectedBetOption())
+    {
+    case 1:
+        return ui->label_5->text();
+    case 2:
+        return ui->label_3->text();
+    default:
+        return "remis";
+    }
+}
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -49,7 +75,7 @@ void MainWindow::on_pushButton_clicked()
     QString text = ui->textEdit->toPlainText();
     bool isOk;
     text.toInt(&isOk);
-    QString selectedChoice = QString::number(Bet::GetSelectedBetOption());
+    QString selectedChoice = GetSelectedTeamName();
 
     if (isOk && selectedChoice != "-1")
     {
@@ -59,7 +85,15 @@ void MainWindow::on_pushButton_clicked()
         ui->homeGoals->setText("");
         ui->awayGoals->setText("");
 
-        ui->textEdit_2->append("Obstawiono " + text + " na " + selectedChoice + " po kursie " + selectedOdds + ".");
+        if(Bet::GetSelectedBetOption() == 0)
+        {
+            ui->textEdit_2->append("Obstawiono " + text + " na remis w meczu " + Team::GetHomeTeam() + " - " + Team::GetAwayTeam() + " po kursie " + selectedOdds + ".");
+        }
+        else
+        {
+            ui->textEdit_2->append("Obstawiono " + text + " na " + selectedChoice +  " w meczu " + Team::GetHomeTeam() + " - " + Team::GetAwayTeam() + " po kursie " + selectedOdds + ".");
+        }
+
         ui->textEdit->setText("");
 
         vector<int> scores = score.DrawScore();
@@ -68,6 +102,7 @@ void MainWindow::on_pushButton_clicked()
 
         Bet::SetBetAmount(text.toInt());
         Bet::AddBet(score);
+        Team::InsertMatchResult(Team::GetHomeTeam(), scores[0], Team::GetAwayTeam(), scores[1]);
 
         for(int i=0; i<=90; i++) {
             bool homeFound = (std::find(homeTeamGoalsMins.begin(), homeTeamGoalsMins.end(), i) != homeTeamGoalsMins.end());
@@ -92,6 +127,8 @@ void MainWindow::on_pushButton_clicked()
         }
 
         ResetAfterBet();
+        SetTeamsForMatch();
+
     }
 
 }

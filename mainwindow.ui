@@ -439,7 +439,7 @@ QPushButton {
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>0</string>
+           <string>Remis</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignBottom|Qt::AlignHCenter</set>

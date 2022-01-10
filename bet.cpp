@@ -1,5 +1,5 @@
 #include "bet.h"
-#include "score.h"
+#include "Score/score.h"
 #include "user.h"
 #include <random>
 #include <chrono>
