@@ -64,13 +64,21 @@ void InitialScreen::on_loginSubmitButton_clicked()
     QString query = QString("SELECT Id, Login, AccountBalance FROM Users WHERE Login = '%1' AND Password = '%2'").arg(login, password);
 
     QSqlQuery queryStatus = DbConnector::SelectQuery(query);
+
     if (queryStatus.next() == true) {
         QMessageBox::information(this, "BettingApp", "Zalogowano pomyślnie");
 
         int userId = queryStatus.value(0).toInt();
         QString login = queryStatus.value(1).toString();
         float accBalance = queryStatus.value(2).toFloat();
-        User::LoggedIn(userId, login, accBalance);
+        query = QString("SELECT Id, Money, BetType, MatchId FROM Bets WHERE UserId = '%1'").arg(userId);
+        queryStatus = DbConnector::SelectQuery(query);
+        list<UserBet> userBets;
+        while (queryStatus.next() == true) {
+            UserBet userBet(queryStatus.value(0).toInt(), queryStatus.value(1).toInt(), queryStatus.value(2).toInt(), queryStatus.value(3).toInt(), "Druzyna 1", "Druzyna 2");
+            userBets.push_back(userBet);
+        }
+        User::LoggedIn(userId, login, accBalance, userBets);
 
         mainWindow = new MainWindow(this);
         mainWindow->show();

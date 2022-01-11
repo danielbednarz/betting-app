@@ -122,3 +122,33 @@ void MainWindow::on_betAwayButton_clicked()
     ui->betAwayButton->setStyleSheet("background-color: #ff6f00;");
 }
 
+void MainWindow::on_profileButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->userProfileHeader->setText("Witaj " + User::GetUserName() + "!");
+    ui->accountBalanceProfileLabel->setText("Stan konta: " + QString::number(User::GetUserAccountBalance()));
+    ui->userHistoricalBets->setHorizontalHeaderLabels(QStringList() << "Kwota" << "Druzyna domowa" << "Typ zakladu" << "Druzyna wyjazdowa");
+    ui->userHistoricalBets->setColumnWidth(0, 100);
+    ui->userHistoricalBets->setColumnWidth(1, 170);
+    ui->userHistoricalBets->setColumnWidth(2, 120);
+    ui->userHistoricalBets->setColumnWidth(3, 170);
+    int num = 0;
+    for (auto const& i : User::GetUserBets()) {
+        ui->userHistoricalBets->insertRow(num);
+        QTableWidgetItem *item = new QTableWidgetItem(tr("%1").arg(i.money));
+        ui->userHistoricalBets->setItem(num, 0, item);
+        item = new QTableWidgetItem(tr("%1").arg(i.homeTeamName));
+        ui->userHistoricalBets->setItem(num, 1, item);
+        item = new QTableWidgetItem(tr("%1").arg(i.betType));
+        ui->userHistoricalBets->setItem(num, 2, item);
+        item = new QTableWidgetItem(tr("%1").arg(i.awayTeamName));
+        ui->userHistoricalBets->setItem(num, 3, item);
+        num++;
+    }
+}
+
+void MainWindow::on_returnToBetPageButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+

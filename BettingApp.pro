@@ -11,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     DbConnector/DbConnector.cpp \
+    UserProfile/userbet.cpp \
     bet.cpp \
     InitialScreen/initialscreen.cpp \
     main.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 HEADERS += \
     DbConnector/DbConnector.h \
     InitialScreen/initialscreen.h \
+    UserProfile/userbet.h \
     bet.h \
     mainwindow.h \
     score.h \

@@ -28,6 +28,10 @@ private slots:
 
     void on_betAwayButton_clicked();
 
+    void on_returnToBetPageButton_clicked();
+
+    void on_profileButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -4,16 +4,18 @@
 int User::userId;
 QString User::userName;
 float User::userAccountBalance;
+list<UserBet> User::userBets;
 
 User::User()
 {
 }
 
-void User::LoggedIn(int id, QString login, float accBalance)
+void User::LoggedIn(int id, QString login, float accBalance, list<UserBet> bets)
 {
     User::userId = id;
     User::userName = login;
     User::userAccountBalance = accBalance;
+    User::userBets = bets;
 }
 
 void User::RenewUserBalance()
@@ -39,4 +41,9 @@ QString User::GetUserName()
 float User::GetUserAccountBalance()
 {
     return User::userAccountBalance;
+}
+
+list<UserBet> User::GetUserBets()
+{
+    return User::userBets;
 }

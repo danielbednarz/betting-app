@@ -52,9 +52,6 @@ background-color: gray;
        <height>411</height>
       </rect>
      </property>
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
      <widget class="QWidget" name="mainMenu">
       <widget class="QWidget" name="gridLayoutWidget">
        <property name="geometry">
