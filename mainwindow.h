@@ -24,6 +24,8 @@ public:
 private slots:
     void SetTeamsForMatch();
 
+    void SetTeamsRate(QString homeTeam, QString awayTeam);
+
     void ResetAfterBet();
 
     QString GetSelectedTeamName();

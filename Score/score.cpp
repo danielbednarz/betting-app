@@ -1,8 +1,4 @@
 #include "score.h"
-#include <chrono> //For system_clock
-#include <random>
-#include "mainwindow.h"
-using namespace std;
 
 vector<int> Score::DrawScore()
 {
@@ -13,6 +9,15 @@ vector<int> Score::DrawScore()
         scores.push_back(score);
     }
 
+    SetMatchWinner(scores);
+
+    return scores;
+}
+
+
+
+void Score::SetMatchWinner(vector<int> scores)
+{
     if (scores[0] < scores[1])
     {
         matchWinner = 2;
@@ -25,8 +30,6 @@ vector<int> Score::DrawScore()
     {
         matchWinner = 0;
     }
-
-    return scores;
 }
 
 list<int> Score::GetGoalsMinutes(int score)

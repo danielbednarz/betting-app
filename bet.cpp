@@ -1,10 +1,4 @@
 #include "bet.h"
-#include "Score/score.h"
-#include "user.h"
-#include <random>
-#include <chrono>
-#include <vector>
-#include <DbConnector/DbConnector.h>
 
 float Bet::homeOdds;
 float Bet::drawOdds;
@@ -67,11 +61,96 @@ int Bet::GetSelectedBetOption()
     return selectedBetOption;
 }
 
-void Bet::DrawOdds()
+void Bet::DrawOdds(QString homeTeam, QString awayTeam)
 {
-    homeOdds = ceil((1.01 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 1.01))))*100.0)/100.0;
+    vector<float> weights = CalculateTeamsWeight(homeTeam, awayTeam);
+    float totalRate = 5.0;
+
+    float homeTeamRate = totalRate - weights[0];
+    float awayTeamRate = totalRate - weights[1];
+
+    if(homeTeamRate <= 1)
+    {
+        homeTeamRate += 1;
+        awayTeamRate -= 1;
+    }
+
+    if(awayTeamRate <= 1)
+    {
+        homeTeamRate -= 1;
+        awayTeamRate += 1;
+    }
+
+    homeTeamRate = RoundToTwoDecimalPlaces(homeTeamRate);
+    awayTeamRate = RoundToTwoDecimalPlaces(awayTeamRate);
+
+    homeOdds = homeTeamRate; //ceil((1.01 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 1.01))))*100.0)/100.0;
     drawOdds = ceil((2.00 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 2.00))))*100.0)/100.0;
-    awayOdds = ceil((1.01 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 1.01))))*100.0)/100.0;
+    awayOdds = awayTeamRate; //ceil((1.01 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 1.01))))*100.0)/100.0;
+}
+
+float Bet::RoundToTwoDecimalPlaces(float val)
+{
+    QString convertedValue = QString::number(val, 'f', 2);
+
+    return convertedValue.toFloat();
+}
+
+
+vector<float> Bet::CalculateTeamsWeight(QString homeTeam, QString awayTeam)
+{
+    vector<float> weights;
+
+    float homeTeamAverageGoals = CalculateAverageGoalsPerMatch(homeTeam);
+    float awayTeamAverageGoals = CalculateAverageGoalsPerMatch(awayTeam);
+
+    if(homeTeamAverageGoals == 0)
+    {
+        homeTeamAverageGoals = 2.5;
+    }
+    if(awayTeamAverageGoals == 0)
+    {
+        awayTeamAverageGoals = 2.5;
+    }
+
+    float totalWeight = 5;
+    float averageTeamGoalsSum = homeTeamAverageGoals + awayTeamAverageGoals;
+
+    if(homeTeamAverageGoals != awayTeamAverageGoals)
+    {
+        float homeTeamWeightFactor = homeTeamAverageGoals / averageTeamGoalsSum;
+        float awayTeamWeightFactor = 1 - homeTeamWeightFactor;
+
+        weights.push_back(totalWeight * homeTeamWeightFactor);
+        weights.push_back(totalWeight * awayTeamWeightFactor);
+    }
+    else
+    {
+        // W przypadku takiej samej sredniej liczby goli nadajemy te same wagi, przyjalem 2.5 jako srednia wage
+        weights.push_back(2.5);
+        weights.push_back(2.5);
+
+        return weights;
+    }
+
+    qDebug() << weights[0] << " " << weights[1];
+
+    return weights;
+}
+
+float Bet::CalculateAverageGoalsPerMatch(QString team)
+{
+    QString query = QString("SELECT AVG(CAST(Score as decimal(18,2))) FROM TeamsMatches teamsMatches JOIN Teams team ON teamsMatches.TeamId = team.Id WHERE team.[Name] = '%1'").arg(team);
+    QSqlQuery averageGoalsPerMatchQuery = DbConnector::SelectQuery(query);
+
+    if(averageGoalsPerMatchQuery.next())
+    {
+        return averageGoalsPerMatchQuery.value(0).toFloat();
+    }
+    else
+    {
+        return 2.5;
+    }
 }
 
 vector<float> Bet::GetOdds()

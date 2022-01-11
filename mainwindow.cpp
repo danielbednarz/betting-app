@@ -13,12 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     SetTeamsForMatch();
 
-    Bet::DrawOdds();
     srand(time(0));
-    vector<float> odds = Bet::GetOdds();
-    ui->betHomeButton->setText(QString::number(odds[0]));
-    ui->betDrawButton->setText(QString::number(odds[1]));
-    ui->betAwayButton->setText(QString::number(odds[2]));
 
     ui->loggedInAsValue->setText(User::GetUserName());
     ui->accountBalanceValue->setText(QString::number(User::GetUserAccountBalance()));
@@ -33,22 +28,36 @@ void MainWindow::SetTeamsForMatch()
 {
     vector<QString> teamsForMatch = Team::DrawTeamsForMatch();
 
-    Team::SetHomeTeam(teamsForMatch[0]);
-    Team::SetAwayTeam(teamsForMatch[1]);
+    QString homeTeam = teamsForMatch[0];
+    QString awayTeam = teamsForMatch[1];
+
+    Team::SetHomeTeam(homeTeam);
+    Team::SetAwayTeam(awayTeam);
 
     ui->label_5->setText(Team::GetHomeTeam());
     ui->label_3->setText(Team::GetAwayTeam());
+
+    SetTeamsRate(homeTeam, awayTeam);
+}
+
+void MainWindow::SetTeamsRate(QString homeTeam, QString awayTeam)
+{
+    Bet::DrawOdds(homeTeam, awayTeam);
+
+    vector<float> odds = Bet::GetOdds();
+
+    ui->betHomeButton->setText(QString::number(odds[0]));
+    ui->betDrawButton->setText(QString::number(odds[1]));
+    ui->betAwayButton->setText(QString::number(odds[2]));
 }
 
 void MainWindow::ResetAfterBet()
 {
     User::RenewUserBalance();
     ui->accountBalanceValue->setText(QString::number(User::GetUserAccountBalance()));
-    Bet::DrawOdds();
-    vector<float> odds = Bet::GetOdds();
-    ui->betHomeButton->setText(QString::number(odds[0]));
-    ui->betDrawButton->setText(QString::number(odds[1]));
-    ui->betAwayButton->setText(QString::number(odds[2]));
+
+    SetTeamsForMatch();
+
     // do ustalenia, czy da sie to zmienic
     Bet::SetSelectedBetOption(-1);
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
@@ -127,8 +136,6 @@ void MainWindow::on_pushButton_clicked()
         }
 
         ResetAfterBet();
-        SetTeamsForMatch();
-
     }
 
 }

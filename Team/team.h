@@ -15,7 +15,7 @@ class Team
 {
 public:
     Team();
-    static void SeedTeam();
+    static void SeedTeams();
     static vector<QString> DrawTeamsForMatch();
     static void SetHomeTeam(QString input);
     static void SetAwayTeam(QString input);
