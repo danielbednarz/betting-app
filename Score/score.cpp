@@ -14,8 +14,6 @@ vector<int> Score::DrawScore()
     return scores;
 }
 
-
-
 void Score::SetMatchWinner(vector<int> scores)
 {
     if (scores[0] < scores[1])

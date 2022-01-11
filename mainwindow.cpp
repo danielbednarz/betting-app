@@ -103,9 +103,8 @@ void MainWindow::on_pushButton_clicked()
             ui->textEdit_2->append("Obstawiono " + text + " na " + selectedChoice +  " w meczu " + Team::GetHomeTeam() + " - " + Team::GetAwayTeam() + " po kursie " + selectedOdds + ".");
         }
 
-        ui->textEdit->setText("");
-
         vector<int> scores = score.DrawScore();
+
         list<int> homeTeamGoalsMins = score.GetGoalsMinutes(scores[0]);
         list<int> awayTeamGoalsMins = score.GetGoalsMinutes(scores[1]);
 
@@ -134,6 +133,9 @@ void MainWindow::on_pushButton_clicked()
             std::this_thread::sleep_for(timespan);
             ui->progressBar->setValue(i);
         }
+
+        ui->textEdit_2->append(Team::GetHomeTeam() + " " + QString::number(scores[0]) + ":" + QString::number(scores[1]) + " " + Team::GetAwayTeam());
+        ui->textEdit->setText("");
 
         ResetAfterBet();
     }
