@@ -5,6 +5,7 @@
 #include "mainwindow.h"
 #include "DbConnector/DbConnector.h"
 #include "user.h"
+#include "Team/team.h"
 
 namespace Ui {
 class InitialScreen;

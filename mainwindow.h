@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <thread>
 #include "user.h"
+#include "Team/team.h"
+#include <list>
+
+using namespace std;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +22,13 @@ public:
     ~MainWindow();
 
 private slots:
+    void SetTeamsForMatch();
+
+    void SetTeamsRate(QString homeTeam, QString awayTeam);
+
     void ResetAfterBet();
+
+    QString GetSelectedTeamName();
 
     void on_pushButton_clicked();
 

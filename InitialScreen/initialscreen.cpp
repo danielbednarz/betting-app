@@ -7,6 +7,8 @@ InitialScreen::InitialScreen(QWidget *parent) :
 {
     ui->setupUi(this);
     DbConnector::SetUpConnection();
+
+    Team::SeedTeams();
 }
 
 InitialScreen::~InitialScreen()
