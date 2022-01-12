@@ -1,3 +1,7 @@
+CREATE DATABASE BettingApp;
+GO
+USE [BettingApp]
+
 CREATE TABLE Users (
 	 [Id] int NOT NULL IDENTITY(1,1) PRIMARY KEY 
 	,[Login] nvarchar(64) NOT NULL
