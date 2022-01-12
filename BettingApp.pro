@@ -14,11 +14,11 @@ SOURCES += \
     Score/score.cpp \
     Team/team.cpp \
     UserProfile/userbet.cpp \
-    bet.cpp \
+    Bet/bet.cpp \
     InitialScreen/initialscreen.cpp \
     main.cpp \
-    mainwindow.cpp \
-    user.cpp
+    MainWindow/mainwindow.cpp \
+    User/user.cpp
 
 HEADERS += \
     DbConnector/DbConnector.h \
@@ -26,14 +26,14 @@ HEADERS += \
     Score/score.h \
     Team/team.h \
     UserProfile/userbet.h \
-    bet.h \
-    mainwindow.h \
-    score.h \
-    user.h
+    Bet/bet.h \
+    MainWindow/mainwindow.h \
+    Score/score.h \
+    User/user.h
 
 FORMS += \
     InitialScreen/initialscreen.ui \
-    mainwindow.ui
+    MainWindow/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

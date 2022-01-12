@@ -12,7 +12,7 @@
 #include <vector>
 
 #include <chrono> //For system_clock
-#include "mainwindow.h"
+#include "MainWindow/mainwindow.h"
 
 using namespace std;
 

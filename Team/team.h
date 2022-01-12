@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <DbConnector/DbConnector.h>
-#include "mainwindow.h"
+#include "MainWindow/mainwindow.h"
 #include <vector>
 #include <cstdlib>
 #include <ctime>

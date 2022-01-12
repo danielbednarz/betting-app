@@ -2,9 +2,9 @@
 #define INITIALSCREEN_H
 
 #include <QMainWindow>
-#include "mainwindow.h"
+#include "MainWindow/mainwindow.h"
 #include "DbConnector/DbConnector.h"
-#include "user.h"
+#include "User/user.h"
 #include "Team/team.h"
 
 namespace Ui {

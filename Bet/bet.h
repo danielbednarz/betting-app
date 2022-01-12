@@ -2,7 +2,7 @@
 #define BET_H
 
 #include "Score/score.h"
-#include "user.h"
+#include "User/user.h"
 #include <random>
 #include <chrono>
 #include <vector>

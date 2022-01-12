@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "Score/score.h"
 #include "ui_mainwindow.h"
-#include "bet.h"
+#include "Bet/bet.h"
 #include <vector>
 #include <algorithm>
 
