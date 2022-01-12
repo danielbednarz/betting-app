@@ -9,13 +9,13 @@ using namespace std;
 class UserBet
 {
 public:
-    UserBet(int Id, int Money, int BetType, int MatchId, QString HomeTeamName, QString AwayTeamName);
+    UserBet(int Id, int Money, int BetType, QString HomeTeamName, QString AwayTeamName, bool IsWon);
     int id;
     int money;
     int betType;
-    int matchId;
     QString homeTeamName;
     QString awayTeamName;
+    bool isWon;
 };
 
 #endif // USERBET_H

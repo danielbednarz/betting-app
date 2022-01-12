@@ -21,7 +21,7 @@ void Bet::AddBet(Score score)
     // Do przypisania matchId w inny sposob - po ustaleniu w jaki sposob bedziemy je tworzyc (serwer?)
     QString matchQuery = "INSERT INTO Matches VALUES ('" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") + "');";
     int matchId = DbConnector::InsertQuery(matchQuery);
-    QString betQuery = "INSERT INTO Bets VALUES (" + QString::number(betAmount) + ", " + QString::number(matchWinner) + ", NULL, " + QString::number(matchId) + ", " + QString::number(userId) + ");";
+    QString betQuery = "INSERT INTO Bets VALUES (" + QString::number(betAmount) + ", " + QString::number(selectedBetOption) + ", NULL, " + QString::number(matchId) + ", " + QString::number(userId) + ");";
     DbConnector::InsertQuery(betQuery);
     QString takeBalanceQuery = "";
     if (selectedBetOption != matchWinner)

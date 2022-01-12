@@ -170,31 +170,44 @@ void MainWindow::on_betAwayButton_clicked()
 
 void MainWindow::on_profileButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(1);
     ui->userProfileHeader->setText("Witaj " + User::GetUserName() + "!");
     ui->accountBalanceProfileLabel->setText("Stan konta: " + QString::number(User::GetUserAccountBalance()));
-    ui->userHistoricalBets->setHorizontalHeaderLabels(QStringList() << "Kwota" << "Druzyna domowa" << "Typ zakladu" << "Druzyna wyjazdowa");
-    ui->userHistoricalBets->setColumnWidth(0, 100);
-    ui->userHistoricalBets->setColumnWidth(1, 170);
-    ui->userHistoricalBets->setColumnWidth(2, 120);
-    ui->userHistoricalBets->setColumnWidth(3, 170);
+    ui->userHistoricalBets->setHorizontalHeaderLabels(QStringList() << "Kwota" << "Druzyna domowa" << "Typ zakladu" << "Druzyna wyjazdowa" << "Rezultat");
+    ui->userHistoricalBets->setColumnWidth(0, 80);
+    ui->userHistoricalBets->setColumnWidth(1, 130);
+    ui->userHistoricalBets->setColumnWidth(2, 100);
+    ui->userHistoricalBets->setColumnWidth(3, 150);
+    ui->userHistoricalBets->setColumnWidth(4, 80);
     int num = 0;
-    for (auto const& i : User::GetUserBets()) {
+    QString query = QString("SELECT * FROM BetHistory WHERE UserId = '%1'").arg(User::GetUserId());
+    QSqlQuery queryStatus = DbConnector::SelectQuery(query);
+    list<UserBet> userBets;
+    while (queryStatus.next() == true) {
+        UserBet userBet(queryStatus.value(0).toInt(), queryStatus.value(1).toInt(), queryStatus.value(2).toInt(), queryStatus.value(3).toString(), queryStatus.value(4).toString(), queryStatus.value(5).toBool());
+        userBets.push_back(userBet);
+    }
+    for (auto const& bet : userBets) {
         ui->userHistoricalBets->insertRow(num);
-        QTableWidgetItem *item = new QTableWidgetItem(tr("%1").arg(i.money));
+        QTableWidgetItem *item = new QTableWidgetItem(tr("%1").arg(bet.money));
         ui->userHistoricalBets->setItem(num, 0, item);
-        item = new QTableWidgetItem(tr("%1").arg(i.homeTeamName));
+        item = new QTableWidgetItem(tr("%1").arg(bet.homeTeamName));
         ui->userHistoricalBets->setItem(num, 1, item);
-        item = new QTableWidgetItem(tr("%1").arg(i.betType));
+        item = new QTableWidgetItem(tr("%1").arg(bet.betType));
         ui->userHistoricalBets->setItem(num, 2, item);
-        item = new QTableWidgetItem(tr("%1").arg(i.awayTeamName));
+        item = new QTableWidgetItem(tr("%1").arg(bet.awayTeamName));
         ui->userHistoricalBets->setItem(num, 3, item);
+        QString result = bet.isWon ? "Wygrana" : "Przegrana";
+        item = new QTableWidgetItem(tr("%1").arg(result));
+        ui->userHistoricalBets->setItem(num, 4, item);
         num++;
     }
+    ui->stackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::on_returnToBetPageButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    ui->userHistoricalBets->clear();
+    ui->userHistoricalBets->setRowCount(0);
 }
 

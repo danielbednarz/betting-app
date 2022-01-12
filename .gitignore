@@ -1,6 +1,5 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
-
 *~
 *.autosave
 *.a
@@ -318,3 +317,4 @@ paket-files/
 .idea/
 *.sln.iml
 
+config.ini

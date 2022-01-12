@@ -37,3 +37,25 @@ CREATE TABLE TeamsMatches (
 	,[MatchId] int NOT NULL FOREIGN KEY(MatchId) REFERENCES Matches(Id)
 	,[TeamId] int NOT NULL FOREIGN KEY(TeamId) REFERENCES Teams(Id)
 )
+
+CREATE OR ALTER VIEW BetHistory
+    AS
+    SELECT [match].[Id],
+            [Money],
+            [BetType],
+                        (SELECT Name FROM Teams WHERE Id = matchesHome.TeamId) AS [HomeTeamName],
+                        (SELECT Name FROM Teams WHERE Id = matchesAway.TeamId) AS [AwayTeamName],
+            CASE
+                WHEN BetType = 1 AND matchesHome.Score > matchesAway.Score THEN 1
+                WHEN BetType = 0 AND matchesHome.Score = matchesAway.Score THEN 1
+                WHEN BetType = 2 AND matchesHome.Score < matchesAway.Score THEN 1
+                ELSE 0
+            END as IsWon,
+                        [UserId]
+    FROM Bets bet
+    JOIN Matches [match]
+    ON [match].Id = bet.MatchId
+    JOIN TeamsMatches matchesHome
+    ON matchesHome.MatchId = [match].Id AND matchesHome.IsHome = 1
+    JOIN TeamsMatches matchesAway
+    ON matchesAway.MatchId = [match].Id AND matchesAway.IsHome = 0

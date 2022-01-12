@@ -12,11 +12,10 @@ class User
 {
 public:
     User();
-    static void LoggedIn(int id, QString login, float accBalance, list<UserBet> bets);
+    static void LoggedIn(int id, QString login, float accBalance);
     static int GetUserId();
     static QString GetUserName();
     static float GetUserAccountBalance();
-    static list<UserBet> GetUserBets();
     static void RenewUserBalance();
 private:
     static int userId;

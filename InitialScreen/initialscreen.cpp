@@ -73,14 +73,7 @@ void InitialScreen::on_loginSubmitButton_clicked()
         int userId = queryStatus.value(0).toInt();
         QString login = queryStatus.value(1).toString();
         float accBalance = queryStatus.value(2).toFloat();
-        query = QString("SELECT Id, Money, BetType, MatchId FROM Bets WHERE UserId = '%1'").arg(userId);
-        queryStatus = DbConnector::SelectQuery(query);
-        list<UserBet> userBets;
-        while (queryStatus.next() == true) {
-            UserBet userBet(queryStatus.value(0).toInt(), queryStatus.value(1).toInt(), queryStatus.value(2).toInt(), queryStatus.value(3).toInt(), "Druzyna 1", "Druzyna 2");
-            userBets.push_back(userBet);
-        }
-        User::LoggedIn(userId, login, accBalance, userBets);
+        User::LoggedIn(userId, login, accBalance);
 
         mainWindow = new MainWindow(this);
         mainWindow->show();

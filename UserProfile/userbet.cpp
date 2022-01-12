@@ -1,11 +1,11 @@
 #include "userbet.h"
 
-UserBet::UserBet(int Id, int Money, int BetType, int MatchId, QString HomeTeamName, QString AwayTeamName)
+UserBet::UserBet(int Id, int Money, int BetType, QString HomeTeamName, QString AwayTeamName, bool IsWon)
 {
     id = Id;
     money = Money;
     betType = BetType;
-    matchId = MatchId;
     homeTeamName = HomeTeamName;
     awayTeamName = AwayTeamName;
+    isWon = IsWon;
 }
