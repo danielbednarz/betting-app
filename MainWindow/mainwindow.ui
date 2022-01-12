@@ -37,6 +37,18 @@ background-color: gray;
       <height>558</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>800</width>
+      <height>558</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>800</width>
+      <height>558</height>
+     </size>
+    </property>
     <property name="currentIndex">
      <number>0</number>
     </property>

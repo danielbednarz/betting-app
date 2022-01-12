@@ -18,6 +18,7 @@ public:
     static void SetUpConnection();
     static QSqlQuery SelectQuery(QString query);
     static int InsertQuery(QString query);
+    static void SeedData();
 };
 
 #endif // DBCONNECTOR_H

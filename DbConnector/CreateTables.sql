@@ -38,6 +38,8 @@ CREATE TABLE TeamsMatches (
 	,[TeamId] int NOT NULL FOREIGN KEY(TeamId) REFERENCES Teams(Id)
 )
 
+GO
+
 CREATE OR ALTER VIEW BetHistory
     AS
     SELECT [match].[Id],
