@@ -9,12 +9,32 @@ vector<int> Score::DrawScore()
 //        scores.push_back(score);
 //    }
 
-    scores.push_back(homeScore.toInt());
-    scores.push_back(awayScore.toInt());
+    scores.push_back(GetHomeScore().toInt());
+    scores.push_back(GetAwayScore().toInt());
 
     SetMatchWinner(scores);
 
     return scores;
+}
+
+void Score::SetHomeScore(QString score)
+{
+    Score::homeScore = score;
+}
+
+void Score::SetAwayScore(QString score)
+{
+    Score::awayScore = score;
+}
+
+QString Score::GetHomeScore()
+{
+    return Score::homeScore;
+}
+
+QString Score::GetAwayScore()
+{
+    return Score::awayScore;
 }
 
 void Score::SetMatchWinner(vector<int> scores)

@@ -52,7 +52,7 @@ private slots:
 
     void OnReadyRead();
 
-    void SendRequest();
+    void SendScoreRequest();
 
 private:
     Ui::MainWindow *ui;

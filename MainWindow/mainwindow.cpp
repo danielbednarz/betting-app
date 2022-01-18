@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(&socket, &QTcpSocket::connected, this, &MainWindow::OnConnected);
     connect(&socket, &QTcpSocket::readyRead, this, &MainWindow::OnReadyRead);
-
 }
 
 MainWindow::~MainWindow()
@@ -72,6 +71,8 @@ void MainWindow::ResetAfterBet()
     ui->betHomeButton->setStyleSheet("background-color: #6d6d6d;");
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
+
+    SendScoreRequest();
 }
 
 QString MainWindow::GetSelectedTeamName()
@@ -89,8 +90,6 @@ QString MainWindow::GetSelectedTeamName()
 
 void MainWindow::on_pushButton_clicked()
 {
-    SendRequest();
-
     Score score;
     QString text = ui->textEdit->toPlainText();
     bool isOk;
@@ -226,22 +225,22 @@ void MainWindow::on_returnToBetPageButton_clicked()
 void MainWindow::OnConnected()
 {
     qInfo() << "Connected to host.";
+    SendScoreRequest();
 }
 
 void MainWindow::OnReadyRead()
 {
     const auto message = socket.readAll();
-    qDebug() << QString(message);
 
     emit newMessage(message);
 
     QString score = QString(message);
 
-    Score::homeScore = score.at(5);
-    Score::awayScore = score.at(6);
+    Score::SetHomeScore(score.at(5));
+    Score::SetAwayScore(score.at(6));
 }
 
-void MainWindow::SendRequest()
+void MainWindow::SendScoreRequest()
 {
     QString request = "Score";
 
