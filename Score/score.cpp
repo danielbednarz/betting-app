@@ -3,11 +3,14 @@
 vector<int> Score::DrawScore()
 {
     vector<int> scores;
-    for (int i = 0; i < 2; i++)
-    {
-        int score = rand() % 6;
-        scores.push_back(score);
-    }
+//    for (int i = 0; i < 2; i++)
+//    {
+//        int score = rand() % 6;
+//        scores.push_back(score);
+//    }
+
+    scores.push_back(homeScore.toInt());
+    scores.push_back(awayScore.toInt());
 
     SetMatchWinner(scores);
 

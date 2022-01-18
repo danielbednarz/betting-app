@@ -5,6 +5,9 @@
 #include <vector>
 #include <algorithm>
 
+QString Score::homeScore;
+QString Score::awayScore;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -17,6 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->loggedInAsValue->setText(User::GetUserName());
     ui->accountBalanceValue->setText(QString::number(User::GetUserAccountBalance()));
+
+    socket.connectToHost("127.0.0.1", 45000);
+
+    connect(&socket, &QTcpSocket::connected, this, &MainWindow::OnConnected);
+    connect(&socket, &QTcpSocket::readyRead, this, &MainWindow::OnReadyRead);
+
 }
 
 MainWindow::~MainWindow()
@@ -80,6 +89,8 @@ QString MainWindow::GetSelectedTeamName()
 
 void MainWindow::on_pushButton_clicked()
 {
+    SendRequest();
+
     Score score;
     QString text = ui->textEdit->toPlainText();
     bool isOk;
@@ -104,6 +115,7 @@ void MainWindow::on_pushButton_clicked()
         }
 
         vector<int> scores = score.DrawScore();
+
 
         list<int> homeTeamGoalsMins = score.GetGoalsMinutes(scores[0]);
         list<int> awayTeamGoalsMins = score.GetGoalsMinutes(scores[1]);
@@ -209,5 +221,31 @@ void MainWindow::on_returnToBetPageButton_clicked()
     ui->stackedWidget->setCurrentIndex(0);
     ui->userHistoricalBets->clear();
     ui->userHistoricalBets->setRowCount(0);
+}
+
+void MainWindow::OnConnected()
+{
+    qInfo() << "Connected to host.";
+}
+
+void MainWindow::OnReadyRead()
+{
+    const auto message = socket.readAll();
+    qDebug() << QString(message);
+
+    emit newMessage(message);
+
+    QString score = QString(message);
+
+    Score::homeScore = score.at(5);
+    Score::awayScore = score.at(6);
+}
+
+void MainWindow::SendRequest()
+{
+    QString request = "Score";
+
+    socket.write(request.toUtf8());
+    socket.flush();
 }
 

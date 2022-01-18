@@ -23,6 +23,8 @@ public:
     void SetMatchWinner(vector<int> scores);
     list<int> GetGoalsMinutes(int score);
     int GetMatchWinner();
+    static QString homeScore;
+    static QString awayScore;
 private:
     int matchWinner;
 };

@@ -8,7 +8,8 @@ InitialScreen::InitialScreen(QWidget *parent) :
     ui->setupUi(this);
     DbConnector::SetUpConnection();
 
-//    Team::SeedTeams();
+    Team::SeedTeams();
+
 }
 
 InitialScreen::~InitialScreen()
@@ -26,7 +27,6 @@ void InitialScreen::on_aboutGameButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
 }
-
 
 void InitialScreen::on_backFromAboutGameButton_clicked()
 {

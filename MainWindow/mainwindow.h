@@ -6,6 +6,8 @@
 #include "User/user.h"
 #include "Team/team.h"
 #include <list>
+#include <QTcpSocket>
+#include <QDebug>
 
 using namespace std;
 
@@ -17,9 +19,13 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+signals:
+    void newMessage(const QByteArray &ba);
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private slots:
     void SetTeamsForMatch();
@@ -42,7 +48,15 @@ private slots:
 
     void on_profileButton_clicked();
 
+    void OnConnected();
+
+    void OnReadyRead();
+
+    void SendRequest();
+
 private:
     Ui::MainWindow *ui;
+    QTcpSocket socket;
+
 };
 #endif // MAINWINDOW_H

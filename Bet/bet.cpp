@@ -84,9 +84,9 @@ void Bet::DrawOdds(QString homeTeam, QString awayTeam)
     homeTeamRate = RoundToTwoDecimalPlaces(homeTeamRate);
     awayTeamRate = RoundToTwoDecimalPlaces(awayTeamRate);
 
-    homeOdds = homeTeamRate; //ceil((1.01 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 1.01))))*100.0)/100.0;
+    homeOdds = homeTeamRate;
     drawOdds = ceil((2.00 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 2.00))))*100.0)/100.0;
-    awayOdds = awayTeamRate; //ceil((1.01 + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (3.00 - 1.01))))*100.0)/100.0;
+    awayOdds = awayTeamRate;
 }
 
 float Bet::RoundToTwoDecimalPlaces(float val)
@@ -132,8 +132,6 @@ vector<float> Bet::CalculateTeamsWeight(QString homeTeam, QString awayTeam)
 
         return weights;
     }
-
-    qDebug() << weights[0] << " " << weights[1];
 
     return weights;
 }

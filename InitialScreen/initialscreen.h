@@ -7,6 +7,7 @@
 #include "User/user.h"
 #include "Team/team.h"
 
+
 namespace Ui {
 class InitialScreen;
 }
@@ -37,6 +38,7 @@ private slots:
     void on_loginSubmitButton_clicked();
 
     void on_confirmRegisterButton_clicked();
+
 
 private:
     Ui::InitialScreen *ui;
