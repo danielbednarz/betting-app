@@ -72,7 +72,6 @@ void MainWindow::ResetAfterBet()
     ui->betDrawButton->setStyleSheet("background-color: #6d6d6d; margin: 0px 2px 0px 2px;");
     ui->betAwayButton->setStyleSheet("background-color: #6d6d6d;");
 
-    SendScoreRequest();
 }
 
 QString MainWindow::GetSelectedTeamName()
@@ -90,6 +89,7 @@ QString MainWindow::GetSelectedTeamName()
 
 void MainWindow::on_pushButton_clicked()
 {
+    SendScoreRequest();
     Score score;
     QString text = ui->textEdit->toPlainText();
     bool isOk;

@@ -1,5 +1,5 @@
-#ifndef TCPSERVER_HPP
-#define TCPSERVER_HPP
+#ifndef RESPONSE_H
+#define RESPONSE_H
 
 #include <QObject>
 #include <QTcpServer>
@@ -8,14 +8,15 @@
 #include <vector>
 #include <ctime>
 
-class TcpServer : public QObject
+class Response : public QObject
 {
     Q_OBJECT
 public:
-    explicit TcpServer(QObject *parent = nullptr);
+    explicit Response(QObject *parent = nullptr);
 
 signals:
     void newMessage(const QByteArray &ba);
+    void addToList(const QString& arg);
 
 public slots:
     void sendMessage(const QString &message);
@@ -33,4 +34,4 @@ private:
     QHash<QString, QTcpSocket*> _clients;
 };
 
-#endif // TCPSERVER_HPP
+#endif // RESPONSE_H

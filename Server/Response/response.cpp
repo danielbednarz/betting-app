@@ -1,39 +1,39 @@
-#include "TcpServer.hpp"
+#include "response.h"
 
 using namespace std;
 
-TcpServer::TcpServer(QObject *parent) : QObject(parent)
+Response::Response(QObject *parent) : QObject(parent)
 {
     srand(time(0));
 
-    connect(&_server, &QTcpServer::newConnection, this, &TcpServer::onNewConnection);
-    connect(this, &TcpServer::newMessage, this, &TcpServer::onNewMessage);
+    connect(&_server, &QTcpServer::newConnection, this, &Response::onNewConnection);
+    connect(this, &Response::newMessage, this, &Response::onNewMessage);
     if(_server.listen(QHostAddress::Any, 45000)) {
-        qInfo() << "Listening ...";
+
     }
 }
 
-void TcpServer::sendMessage(const QString &message)
+void Response::sendMessage(const QString &message)
 {
+    emit addToList(message);
     emit newMessage(message.toUtf8());
 }
 
-void TcpServer::onNewConnection()
+void Response::onNewConnection()
 {
+    emit addToList("Dolaczyl klient!");
     const auto client = _server.nextPendingConnection();
     if(client == nullptr) {
         return;
     }
 
-    qInfo() << "New client connected.";
-
     _clients.insert(this->getClientKey(client), client);
 
-    connect(client, &QTcpSocket::readyRead, this, &TcpServer::onReadyRead);
-    connect(client, &QTcpSocket::disconnected, this, &TcpServer::onClientDisconnected);
+    connect(client, &QTcpSocket::readyRead, this, &Response::onReadyRead);
+    connect(client, &QTcpSocket::disconnected, this, &Response::onClientDisconnected);
 }
 
-void TcpServer::onReadyRead()
+void Response::onReadyRead()
 {
     const auto client = qobject_cast<QTcpSocket*>(sender());
 
@@ -65,8 +65,9 @@ void TcpServer::onReadyRead()
 
 }
 
-void TcpServer::onClientDisconnected()
+void Response::onClientDisconnected()
 {
+    emit addToList("Klient rozlaczyl sie.");
     const auto client = qobject_cast<QTcpSocket*>(sender());
 
     if(client == nullptr) {
@@ -76,7 +77,7 @@ void TcpServer::onClientDisconnected()
     _clients.remove(this->getClientKey(client));
 }
 
-void TcpServer::onNewMessage(const QByteArray &ba)
+void Response::onNewMessage(const QByteArray &ba)
 {
     for(const auto &client : qAsConst(_clients)) {
         client->write(ba);
@@ -84,7 +85,7 @@ void TcpServer::onNewMessage(const QByteArray &ba)
     }
 }
 
-QString TcpServer::getClientKey(const QTcpSocket *client) const
+QString Response::getClientKey(const QTcpSocket *client) const
 {
     return client->peerAddress().toString().append(":").append(QString::number(client->peerPort()));
 }
