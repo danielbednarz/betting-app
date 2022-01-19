@@ -236,8 +236,8 @@ void MainWindow::OnReadyRead()
 
     QString score = QString(message);
 
-    Score::SetHomeScore(score.at(5));
-    Score::SetAwayScore(score.at(6));
+    Score::SetHomeScore(score.at(0));
+    Score::SetAwayScore(score.at(1));
 }
 
 void MainWindow::SendScoreRequest()

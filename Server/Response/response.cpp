@@ -44,7 +44,6 @@ void Response::onReadyRead()
     const auto message = client->readAll();
 
 
-    emit newMessage(message);
 
     if(QString(message) == QString("Score"))
     {
