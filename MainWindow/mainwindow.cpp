@@ -89,7 +89,6 @@ QString MainWindow::GetSelectedTeamName()
 
 void MainWindow::on_pushButton_clicked()
 {
-    SendScoreRequest();
     Score score;
     QString text = ui->textEdit->toPlainText();
     bool isOk;
@@ -113,8 +112,8 @@ void MainWindow::on_pushButton_clicked()
             ui->textEdit_2->append("Obstawiono " + text + " na " + selectedChoice +  " w meczu " + Team::GetHomeTeam() + " - " + Team::GetAwayTeam() + " po kursie " + selectedOdds + ".");
         }
 
+        SendScoreRequest();
         vector<int> scores = score.DrawScore();
-
 
         list<int> homeTeamGoalsMins = score.GetGoalsMinutes(scores[0]);
         list<int> awayTeamGoalsMins = score.GetGoalsMinutes(scores[1]);
